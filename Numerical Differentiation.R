@@ -1,22 +1,5 @@
-Newton <- function(f, x0=x0,N=N,tol=tol,h=h) {
-  h=h
-  i = 1
-  x1 = x0
-  p=numeric(N)
 
-  while (i<=N) {
-    df.dx = (f(x0+h)-f(x0))/h
-    x1 = (x0 - (f(x0)/df.dx))
-    p[i] = x1
-    i = i + 1
-
-    if(abs(x1-x0) < tol) break
-    #if((x1/x0)<(1.1) && (x1/x0)>(.9)) break
-    x0 = x1
-
-  }
-  return(p[1:(i-1)])
-}
+## f = function(x) ...
 
 
 Numerical.differentiation = function(point,h,tol=1e-10,print.trace="FALSE"){
