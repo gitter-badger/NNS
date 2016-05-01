@@ -111,7 +111,9 @@ print(slope)
       print(max(f((point-(100*h)):(point+(100*h)))))
 
       plot(f, xlim = c(point-(100*h), point+(100*h)),col='blue',ylab='f(x)',lwd=2,
-           ylim = c(min(c(min(c(B1,B2)),min(na.omit(f((point-(100*h)):(point+(100*h))))))),max(na.omit(f((point-(100*h)):(point+(100*h)))))),
+           ylim = c(min(c(min(c(B1,B2)),min(na.omit(f((point-(100*h)):(point+(100*h))))))),
+        max(c(max(na.omit(f((point-(100*h)):(point+(100*h))))),
+              max(c(B1,B2))))),
            main='f(x) and initial y-intercept range')
       abline(h=0,v=0)
       points(point,f.x, pch=19,col='red')
