@@ -126,7 +126,7 @@ Numerical.differentiation = function(point,h,tol=1e-10,print.trace="FALSE"){
       ## Plot #2
       plot(f,col='azure4',ylab='f(x)',lwd=3,main='f(x) narrowed range and secant lines',
           xlim = c(min(c(point-h,point+h,0)),max(c(point+h,point-h,0))),
-          ylim= c(min(c(B1,B2,0)),max(c(B1,B2,f.x.h.lower,f.x.h.upper)))
+          ylim= c(min(c(B1,B2,f.x.h.lower,f.x.h.upper)),max(c(B1,B2,f.x.h.lower,f.x.h.upper)))
 
 
           )
