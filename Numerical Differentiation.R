@@ -120,8 +120,8 @@ Numerical.differentiation = function(point,h,tol=1e-10,print.trace="FALSE"){
       points(point-h,f.x.h.lower,col=ifelse(B1==high.B,'blue','red'),pch=19)
       points(point+h,f.x.h.upper,col=ifelse(B1==high.B,'red','blue'),pch=19)
       points(x=rep(0,2),y=c(B1,B2),col=c(ifelse(B1==high.B,'blue','red'),ifelse(B1==high.B,'red','blue')),pch=1)
-      segments(0,B1,point-h,f.x.h.lower,col='blue',lty=2)
-      segments(0,B2,point+h,f.x.h.upper,col='red',lty=2)
+      segments(0,B1,point-h,f.x.h.lower,col=ifelse(B1==high.B,'blue','red'),lty=2)
+      segments(0,B2,point+h,f.x.h.upper,col=ifelse(B1==high.B,'red','blue'),lty=2)
 
       ## Plot #2
       plot(f,col='azure4',ylab='f(x)',lwd=3,main='f(x) narrowed range and secant lines',
@@ -137,7 +137,7 @@ Numerical.differentiation = function(point,h,tol=1e-10,print.trace="FALSE"){
       points(point,f.x, pch=19,col='green')
       segments(0,B1,point-h,f.x.h.lower,col=ifelse(B1==high.B,'blue','red'),lty=2)
       segments(0,B2,point+h,f.x.h.upper,col=ifelse(B1==high.B,'red','blue'),lty=2)
-   points(x=rep(0,2),y=c(B1,B2),col=c(ifelse(B1==high.B,'blue','red'),ifelse(B1==high.B,'red','blue')),pch=1)
+      points(x=rep(0,2),y=c(B1,B2),col=c(ifelse(B1==high.B,'blue','red'),ifelse(B1==high.B,'red','blue')),pch=1)
 
 
    ## Plot #3
