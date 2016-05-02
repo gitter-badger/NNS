@@ -105,35 +105,48 @@ Numerical.differentiation = function(point,h,tol=1e-10,print.trace="FALSE"){
 
       final.B = mean(c(upper.B,lower.B))
       slope = solve(point, f.x-final.B)
-print(slope)
+
       par(mfrow=c(1,3))
 
-      print(max(f((point-(100*h)):(point+(100*h)))))
-
-      plot(f, xlim = c(point-(100*h), point+(100*h)),col='blue',ylab='f(x)',lwd=2,
+      ## Plot #1
+      plot(f, xlim = c(min(c(point-(100*h), point+(100*h)),0),max(c(point-(100*h), point+(100*h)),0)),
+           col='azure4',ylab='f(x)',lwd=2,
            ylim = c(min(c(min(c(B1,B2)),min(na.omit(f((point-(100*h)):(point+(100*h))))))),
         max(c(max(na.omit(f((point-(100*h)):(point+(100*h))))),
               max(c(B1,B2))))),
            main='f(x) and initial y-intercept range')
-      abline(h=0,v=0)
-      points(point,f.x, pch=19,col='red')
-      points(x=rep(0,2),y=c(B1,B2),col='green',pch=19)
-      segments(0,B1,point-h,f.x.h.lower,col='green')
-      segments(0,B2,point+h,f.x.h.upper,col='green')
+      abline(h=0,v=0,col='grey')
+      points(point,f.x, pch=19,col='green')
+      points(point-h,f.x.h.lower,col=ifelse(B1==high.B,'blue','red'),pch=19)
+      points(point+h,f.x.h.upper,col=ifelse(B1==high.B,'red','blue'),pch=19)
+      points(x=rep(0,2),y=c(B1,B2),col=c(ifelse(B1==high.B,'blue','red'),ifelse(B1==high.B,'red','blue')),pch=1)
+      segments(0,B1,point-h,f.x.h.lower,col='blue',lty=2)
+      segments(0,B2,point+h,f.x.h.upper,col='red',lty=2)
+
+      ## Plot #2
+      plot(f,col='azure4',ylab='f(x)',lwd=3,main='f(x) narrowed range and secant lines',
+          xlim = c(min(c(point-h,point+h,0)),max(c(point+h,point-h,0))),
+          ylim= c(min(c(B1,B2,0)),max(c(B1,B2,f.x.h.lower,f.x.h.upper)))
 
 
-      plot(f, xlim = c(point-1, point+1),col='blue',ylab='f(x)',lwd=3,main='f(x) narrowed range and secant lines')
+          )
+      abline(h=0,v=0,col='grey')
       points(point,f.x, pch=19,col='red')
-      points(point-h,f.x.h.lower,col='green',pch=19)
-      points(point+h,f.x.h.upper,col='green',pch=19)
-      points(point,f.x, pch=19,col='red')
-      segments(0,B1,point-h,f.x.h.lower,col='green')
-      segments(0,B2,point+h,f.x.h.upper,col='green')
+      points(point-h,f.x.h.lower,col=ifelse(B1==high.B,'blue','red'),pch=19)
+      points(point+h,f.x.h.upper,col=ifelse(B1==high.B,'red','blue'),pch=19)
+      points(point,f.x, pch=19,col='green')
+      segments(0,B1,point-h,f.x.h.lower,col=ifelse(B1==high.B,'blue','red'),lty=2)
+      segments(0,B2,point+h,f.x.h.upper,col=ifelse(B1==high.B,'red','blue'),lty=2)
+   points(x=rep(0,2),y=c(B1,B2),col=c(ifelse(B1==high.B,'blue','red'),ifelse(B1==high.B,'red','blue')),pch=1)
 
-      plot(Bs,ylim=c(min(c(Bl,Bu)),max(c(Bl,Bu))),ylab="y-inetercept",col='green',pch=19,
+
+   ## Plot #3
+      plot(Bs,ylim=c(min(c(Bl,Bu)),max(c(Bl,Bu))),xlab="Iterations",ylab="y-inetercept",col='green',pch=19,
            main='Iterated range of y-intercept')
       points(Bl,col='red',ylab='')
       points(Bu,col='blue',ylab='')
+
+      legend('topright',c("Upper y-intercept","Lower y-intercept","Mean y-intercept"),col= c('blue','red','green'),pch=c(1,1,19))
 
 
 
