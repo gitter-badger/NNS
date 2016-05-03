@@ -56,7 +56,6 @@ Numerical.differentiation = function(point,h,tol=1e-10,print.trace="FALSE"){
 
   new.B = mean(c(lower.B,upper.B))
 
-
   i=1
   while(i>=1L){
     Bl[i] = lower.B
@@ -70,41 +69,16 @@ Numerical.differentiation = function(point,h,tol=1e-10,print.trace="FALSE"){
 
     if(print.trace=="TRUE") {print(c("h"=inferred.h,"Lower B" = lower.B,"Upper B" = upper.B))}
 
-
-    ## NARROW THE RANGE OF B BASED ON SIGN OF INFERRED.H
-    if(B1==high.B){
-      if(sign(inferred.h) < 0) {
-        lower.B = new.B
-        upper.B = upper.B
-      }
-
-      else {
-        upper.B = new.B
-        lower.B = lower.B
-      }}  else{
-        if(sign(inferred.h) < 0) {
-          lower.B = lower.B
-          upper.B = new.B
-        }
-        else {
-          upper.B = upper.B
-          lower.B = new.B
-        }}
-
-
-
-    new.B = mean(c(lower.B,upper.B))
     Bs[i]=new.B
-    i = i+1
-
 
     ## Stop when the inferred h is within the tolerance level
-
     if(abs(inferred.h)<tol) {
 
 
       final.B = mean(c(upper.B,lower.B))
       slope = solve(point, f.x-final.B)
+
+      z = complex(real = point, imaginary = inferred.h)
 
       par(mfrow=c(1,3))
 
@@ -158,8 +132,35 @@ Numerical.differentiation = function(point,h,tol=1e-10,print.trace="FALSE"){
                          Finite.step(point,h)[1:2],
                          "Averaged Finite Step Initial h "=Finite.step(point,h)[3],
                          "Inferred h"=Finite.step(point,inferred.h)[1:2],
-                         "Inferred h Averaged Finite Step"=Finite.step(point,inferred.h)[3])))
+                         "Inferred h Averaged Finite Step"=Finite.step(point,inferred.h)[3],
+                        "Complex Step Derivative (Initial h)" = Im(f(z))/Im(z))))
     }
+
+
+    ## NARROW THE RANGE OF B BASED ON SIGN OF INFERRED.H
+    if(B1==high.B){
+      if(sign(inferred.h) < 0) {
+        lower.B = new.B
+        upper.B = upper.B
+      }
+
+      else {
+        upper.B = new.B
+        lower.B = lower.B
+      }}  else{
+        if(sign(inferred.h) < 0) {
+          lower.B = lower.B
+          upper.B = new.B
+        }
+        else {
+          upper.B = upper.B
+          lower.B = new.B
+        }}
+
+
+    new.B = mean(c(lower.B,upper.B))
+
+    i = i+1
   }
 
 }
