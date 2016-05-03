@@ -43,7 +43,7 @@ Numerical.differentiation = function(point,h,tol=1e-10,print.trace="FALSE"){
   upper.B = high.B
 
 
-  ## Return value at f(x) if lower.B and upper.B are identical to 20 digits
+  ## Return "Derivative Does Not Exist" if lower.B and upper.B are identical to 20 digits
   if(lower.B==upper.B){
 
     par(mfrow=c(1,2))
@@ -51,7 +51,7 @@ Numerical.differentiation = function(point,h,tol=1e-10,print.trace="FALSE"){
     points(point,f.x, pch=19,col='red')
     plot(f, xlim = c(point-1, point+1),col='blue',ylab='f(x)')
     points(point,f.x, pch=19,col='red')
-    return(c("Misspecified Scenario"))}
+    return(c("Derivative Does Not Exist"))}
 
 
   new.B = mean(c(lower.B,upper.B))
@@ -67,7 +67,7 @@ Numerical.differentiation = function(point,h,tol=1e-10,print.trace="FALSE"){
 
     inferred.h = uniroot(new.f, c(-2*h,2*h))$root
 
-    if(print.trace=="TRUE") {print(c("h"=inferred.h,"Lower B" = lower.B,"Upper B" = upper.B))}
+    if(print.trace=="TRUE") {print(c("Iteration"=i, "h"=inferred.h,"Lower B" = lower.B,"Upper B" = upper.B))}
 
     Bs[i]=new.B
 
