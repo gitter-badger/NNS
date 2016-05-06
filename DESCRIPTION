@@ -11,3 +11,6 @@ LazyData: TRUE
 RoxygenNote: 5.0.1
 NeedsCompilation: no
 Packaged: 2016-05-05 14:49:13 UTC; Fred Viole
+Collate:
+    'Partition_Map.R'
+    'Partial_Moments.R'
