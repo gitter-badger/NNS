@@ -1,8 +1,14 @@
-language: R
+language: r
 sudo: false
 cache: packages
-
-notifications:
+r_packages:
+- testthat
+- covr
+after_failure:
   email:
-    on_success: yaakov@fpsignals.com
-    on_failure: yaakov@fpsignals.com
+    recipients:
+     - john@fpsignals.com
+    on_success: change
+    on_failure: change
+after_success:
+- Rscript -e 'library("covr");codecov()'
