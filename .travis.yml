@@ -9,6 +9,7 @@ install:
   - ./travis-tool.sh install_deps
   ## For a CRAN package
   ##- ./travis-tool.sh install_r <package>
+  
   ## For a GitHub package
   - ./travis-tool.sh install_github merl-dev/NNS
 
